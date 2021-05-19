@@ -109,7 +109,9 @@
     <Content Include="alarmSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RedAlert.ico" />
+    <Content Include="RedAlert.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MediaPlayer">
