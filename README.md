@@ -19,8 +19,8 @@ Setup file can be found in the  [Releases Page](https://github.com/t0mer/RedAler
 
 
 ## Working with RedAlertop
-By default RedAlertop will be open minimized and hidden. you will able to see it's icon on the syatem tray.
-Double click it and the main window will open. 
+By default RedAlertop will be open minimized and hidden. you will able to see it's icon on the syatem tray. Double click it and the main window will open. 
+
 [![RedAlertop tray Icon](https://github.com/t0mer/RedAlertop/blob/main/screeshots/redalertop%20icon.png?raw=true "RedAlertop tray Iconp")](https://github.com/t0mer/RedAlertop/blob/main/screeshots/redalertop%20icon.png?raw=true "RedAlertop tray Icon")
 
 If you want to close RedAlertop, Clck the X (close button in the upper corner of the windows) or the Minimize button
