@@ -1,0 +1,14 @@
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\RedAlrtop.exe.config
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\RedAlrtop.exe
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\RedAlrtop.pdb
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.csprojAssemblyReference.cache
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.Properties.Resources.resources
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.csproj.GenerateResource.cache
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.exe
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.pdb
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Interop.IWshRuntimeLibrary.dll
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Interop.Shell32.dll
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.csproj.CopyComplete
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Newtonsoft.Json.dll
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Newtonsoft.Json.xml
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.RedAlertop.resources
