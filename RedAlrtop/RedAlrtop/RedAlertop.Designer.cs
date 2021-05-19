@@ -118,7 +118,7 @@
             // 
             // SoundFileDialog
             // 
-            this.SoundFileDialog.Filter = "Audio|*.wav;*.mp3;*.mp4";
+            this.SoundFileDialog.Filter = "Audio|*.wav";
             // 
             // notifyIcon
             // 
@@ -152,6 +152,7 @@
             this.Controls.Add(this.AutoStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Logger);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RedAlertop";

@@ -68,6 +68,13 @@ namespace RedAlrtop
         private void Monitor_OnAlert(object sender, Common.AlertEventArgs e)
         {
             Logger.AppendLine(Color.White, string.Format("{0} {1} {2} \n", e.AlertDate.ToString("dd/MM/yyyy HH:mm"), e.Alert.title, JsonConvert.SerializeObject(e.Alert.data)));
+            string Areas = "";
+            foreach (var area in e.Alert.data)
+            {
+                Areas = Areas + area + " \n";
+            }
+
+            Alert(string.Format("{0} \n {1} \n {2}", e.AlertDate.ToString("dd/MM/yyyy HH:mm"), e.Alert.title, Areas));
         }
 
 
@@ -75,7 +82,7 @@ namespace RedAlrtop
         private void Save_Click(object sender, EventArgs e)
         {
             SaveSettings();
-            
+
         }
 
         private void SaveSettings()
@@ -84,6 +91,13 @@ namespace RedAlrtop
             config.AppSettings.Settings["SoundFile"].Value = this.SoundFilePath.Text;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+            if (AutoStart.Checked)
+                this.startupManager.EnableAutoStart();
+            else
+                this.startupManager.DisableAutoStart();
+
+
+
             player.SoundLocation = this.SoundFilePath.Text;
         }
 
@@ -114,8 +128,11 @@ namespace RedAlrtop
         private void Alert(string Message)
         {
             this.notifyIcon.ShowBalloonTip(3000, "Red Alert", Message, ToolTipIcon.Warning);
-            player.Play();
-
+            try
+            {
+                player.Play();
+            }
+            catch { }
         }
     }
 }
