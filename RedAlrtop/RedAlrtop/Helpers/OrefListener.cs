@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace RedAlrtop.Helpers
         private System.Timers.Timer timer;
         public event EventHandler<AlertEventArgs> OnAlert;
         private string OrefApiUrl = "https://www.oref.org.il/WarningMessages/alert/alerts.json";
+        private string Region = ConfigurationManager.AppSettings["Region"];
         private List<Alert> alerts = new List<Alert>();
         /// <summary>
         /// Oref Listenr is running Http request to Oref.org.il in order to recive Red Alert Messages
@@ -77,31 +79,43 @@ namespace RedAlrtop.Helpers
                 try
                 {
 
-
                     //Setting The Http Headers needed to make successful request
                     _webClient.Headers.Add("Referer", "https://www.oref.org.il/");
 
                     //Using User-Agent Header as Chrome Web Browser ontop of Windows 10
                     _webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36");
 
+                    //Add X-Requested-With Header to the request
                     _webClient.Headers.Add("X-Requested-With", "XMLHttpRequest");
 
+                    //Setting Encoding to UTF-8
                     _webClient.Encoding = Encoding.UTF8;
 
+                    //Get the alert json from Oref website
                     var jsonResult = _webClient.DownloadString(this.OrefApiUrl);
-                    //If there is no alert, the json response is Empty
 
+                    //If there is no alert, the json response is Empty so don't fire alert
                     if (!String.IsNullOrEmpty(jsonResult))
                     {
                         //Deserializing Json Result into Alert Object
                         Alert alert = JsonConvert.DeserializeObject<Alert>(jsonResult);
+
+                        //Chec if the specific alert already fired
                         bool AlertFired = alerts.Any(item => item.id == alert.id);
+
                         //if someone registerd to OnAlert Event, rise it
                         if (this.OnAlert != null && !AlertFired)
                         {
-                            AlertEventArgs args = new AlertEventArgs(alert, DateTime.Now);
-                            this.OnAlert(this, args);
-                            alerts.Add(alert);
+                            if (Region == "*" || HasMatch(alert.data.ToArray()))
+                            {
+                                //Fire the alert
+                                AlertEventArgs args = new AlertEventArgs(alert, DateTime.Now);
+                                this.OnAlert(this, args);
+                                //Add the fired alert to the list of fired alerts in order to avoid multiple alerts
+                                alerts.Add(alert);
+                                args = null;
+                                GC.Collect();
+                            }
                         }
                     }
                 }
@@ -115,6 +129,23 @@ namespace RedAlrtop.Helpers
             }
         }
 
+        /// <summary>
+        /// Check if alert fired for the selected region
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private bool HasMatch(string[] data)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                Match match = Regex.Match(Region, data[i], RegexOptions.IgnoreCase);
+                if (match.Success)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         private void Logger(Exception ex)
         {

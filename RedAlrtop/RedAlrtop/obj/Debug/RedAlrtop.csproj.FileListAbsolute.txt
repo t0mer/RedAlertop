@@ -12,3 +12,6 @@ D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.csproj.Co
 D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Newtonsoft.Json.dll
 D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\Newtonsoft.Json.xml
 D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.RedAlertop.resources
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\Interop.MediaPlayer.dll
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\obj\Debug\RedAlrtop.csproj.ResolveComReference.cache
+D:\Development\_git\RedAlertop\RedAlrtop\RedAlrtop\bin\Debug\alarmSound.wav

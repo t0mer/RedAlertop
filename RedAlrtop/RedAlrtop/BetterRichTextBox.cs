@@ -45,13 +45,13 @@ namespace RedAlrtop
             if (this.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(AppendText);
-                this.Invoke(d, new object[] { color, text });
+                this.Invoke(d, new object[] { color, text + "\n"});
             }
             else
             {
 
                 AppendText(color, text, args);
-                AppendText(Environment.NewLine);
+                AppendText(color, "\n");
             }
 
 
