@@ -14,4 +14,17 @@ RedAlertop is a small and lightweight software written in C# in order to allow u
 * Select The Alert sound (Currently supporting .wav files only).<br/>
   The default alert sound is the one from Oref website.
 
+## Installing
+Setup file can be found in the  [Releases Page](https://github.com/t0mer/RedAlertop/releases)
+
+
+## Bug Reporting
+Found a bug? feel free to report by open an Issue in the [Issues Page](https://github.com/t0mer/RedAlertop/issues).
+
+
+*Please :star: this repo if you find it useful*
+
+<p align="left"><br>
+<a href="https://www.paypal.com/paypalme/techblogil?locale.x=he_IL" target="_blank"><img src="http://khrolenok.ru/support_paypal.png" alt="PayPal" width="250" height="48"></a>
+</p>
 
