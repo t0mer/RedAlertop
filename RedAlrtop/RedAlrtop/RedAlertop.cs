@@ -13,9 +13,11 @@ namespace RedAlrtop
 {
     public partial class RedAlertop : Form
     {
-        OrefListener monitor = new OrefListener();
+        private OrefListener HttpListener;
+        private MQTTListener MqttListener;
         StartupManager startupManager = new StartupManager();
         SoundPlayer player = new SoundPlayer();
+        private string AlertSource;
         public RedAlertop()
         {
 
@@ -26,21 +28,38 @@ namespace RedAlrtop
                 this.SoundFilePath.Text = Path.Combine(Application.StartupPath, "alarmSound.wav");
                 SaveSettings();
             }
-            player.SoundLocation = this.SoundFilePath.Text;
+            else
+            {
+                this.SoundFilePath.Text = ConfigurationManager.AppSettings["SoundFile"];
+                player.SoundLocation = ConfigurationManager.AppSettings["SoundFile"];
+            }
+
         }
 
         private void RedAlertop_Load(object sender, EventArgs e)
         {
             AutoStart.Checked = startupManager.CheckAutoStart();
-
             this.SoundFilePath.Text = ConfigurationManager.AppSettings["SoundFile"];
-            this.AlertRegion.Text = ConfigurationManager.AppSettings["Region"];
-            monitor.OnAlert += Monitor_OnAlert;
-            monitor.Start();
+            this.AlertRegion.Text = !string.IsNullOrEmpty(ConfigurationManager.AppSettings["Region"]) ? ConfigurationManager.AppSettings["Region"] : "*";
+            this.AlertSource = !string.IsNullOrEmpty(ConfigurationManager.AppSettings["AlertSource"]) ? ConfigurationManager.AppSettings["AlertSource"] : "http";
+
+
+            if (this.AlertSource == "mqtt")
+            {
+                this.MqttListener = new MQTTListener();
+                MqttListener.OnAlert += Monitor_OnAlert;
+                MqttListener.Connect();
+
+            }
+            else
+            {
+                this.HttpListener = new OrefListener();
+                HttpListener.OnAlert += Monitor_OnAlert;
+                this.HttpListener.Start();
+            }
+   
             this.HideMe();
             ShowNotification("Red Alert is running", ToolTipIcon.Info);
-
-
         }
 
 
@@ -60,7 +79,7 @@ namespace RedAlrtop
 
         private void RedAlertop_FormClosing(object sender, FormClosingEventArgs e)
         {
-            monitor.Stop();
+            bool stopped = this.AlertSource == "mqtt" ? MqttListener.Disconnect() : HttpListener.Stop();
             notifyIcon.Visible = false;
         }
 
@@ -132,7 +151,10 @@ namespace RedAlrtop
             {
                 player.Play();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                var e = ex;
+            }
         }
     }
 }

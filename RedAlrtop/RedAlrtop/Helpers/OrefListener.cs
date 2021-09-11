@@ -18,9 +18,10 @@ namespace RedAlrtop.Helpers
     {
         private System.Timers.Timer timer;
         public event EventHandler<AlertEventArgs> OnAlert;
+        private List<Alert> alerts = new List<Alert>();
         private string OrefApiUrl = "https://www.oref.org.il/WarningMessages/alert/alerts.json";
         private string Region = ConfigurationManager.AppSettings["Region"];
-        private List<Alert> alerts = new List<Alert>();
+        
         /// <summary>
         /// Oref Listenr is running Http request to Oref.org.il in order to recive Red Alert Messages
         /// </summary>
